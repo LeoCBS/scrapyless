@@ -21,7 +21,7 @@ Running scrapy as serverless.. we could put all backend dependencies in server r
 
 ## Custom runtime
 
-To make run scrapy without dependencie.. and avoid configuration at which deploy.. we will put everything that our spider need on one custom kubeless runtime. To check how kubeless runtime works, check this [link](https://github.com/kubeless/kubeless/blob/master/docs/runtimes.md#use-a-custom-runtime). Basiclly, we need provider one Docker image with deps and docker entrypoint must be one http server listem kubeless interaction.
+To make run scrapy without dependencie.. and avoid configuration at which deploy.. we will put everything that our spider needs on one custom kubeless runtime. To check how kubeless runtime works, check this [link](https://github.com/kubeless/kubeless/blob/master/docs/runtimes.md#use-a-custom-runtime). Basiclly, we need provider one Docker image with deps and docker entrypoint must be one http server listem kubeless interaction.
 
 More infos about how developer one custom runtime [here](https://github.com/kubeless/runtimes/blob/master/DEVELOPER_GUIDE.md)
 
@@ -29,17 +29,20 @@ More infos about how developer one custom runtime [here](https://github.com/kube
 
 Docker build
 
-    docker build . -f Dockerfile -t leocbs/scrapyless:<image_tag>
+    make build-image
 
-
+Push image
+    
+    make push-image
 
 ## How to deploy
 
 Now we will deploy on simple Spider made with [scrapy framework](https://scrapy.org/) as one simpe function [(serveless)](https://martinfowler.com/articles/serverless.html) using kubeless on kubernetes with specific runtime `scrapy1.7.0`
 
-start minikube
+start minikube with (kubeless already installed):
 
     minikube start
 
+Change kubeless configmap
 
-
+    kubectl get kubeless-config -n kubeless -o yaml > kubeless-config.yaml
