@@ -8,7 +8,7 @@ data:
   ingress-enabled: "false"
   provision-image: kubeless/unzip@sha256:4863100364496255de9bf8722a220dad7143ab277ac72435876eb8c93936e9d7
   provision-image-secret: ""
-  runtime-images: '[{"ID": "ballerina", "depName": "", "fileNameSuffix": ".bal", "versions":
+  runtime-images: '[{"ID": "scrapyless","compiled": false,"versions": [{"name": "scrapyless","version": "latest","runtimeImage": "leocbs/scrapyless:latest","initImage": "python:3.6"}],"depName": "requirements.txt","fileNameSuffix": ".py"},{"ID": "ballerina", "depName": "", "fileNameSuffix": ".bal", "versions":
     [{"images": [{"command": "/compile-function.sh $KUBELESS_FUNC_NAME", "image":
     "ballerina/kubeless-ballerina-init@sha256:a04ca9d289c62397d0b493876f6a9ff4cc425563a47aa7e037c3b850b8ceb3e8",
     "phase": "compilation"}, {"image": "ballerina/kubeless-ballerina@sha256:a025841010cfdf8136396efef31d4155283770d331ded6a9003e6e55f02db2e5",
