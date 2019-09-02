@@ -46,3 +46,37 @@ start minikube with (kubeless already installed):
 Change kubeless configmap
 
     kubectl get kubeless-config -n kubeless -o yaml > kubeless-config.yaml
+
+Add custom runtime config inside runtimes configurations
+
+```{
+    "ID": "scrapyless",
+    "compiled": false,
+    "versions": [
+        {
+        "name": "scrapyless",
+        "version": "latest",
+        "runtimeImage": "leocbs/scrapyless:latest",
+        "initImage": "python:3.6"
+        }
+    ],
+    "depName": "requirements.txt",
+    "fileNameSuffix": ".py"
+}
+```
+
+Apply new kubernetes config map
+
+     kubectl delete -f ./kubeless-config.yaml && kubectl create -f ./kubeless-config.yaml
+
+Restart the kubeless-controller-manager pod
+
+    PODNAME=$(kubectl get pod -l kubeless=controller -o jsonpath="{.items[0].metadata.name}")
+    kubectl get pod $PODNAME -n kubeless -o yaml | kubectl replace --force -f -
+
+
+
+## Referencies
+
+https://github.com/defrox/kubeless-custom-runtime
+https://kubeless.io/
